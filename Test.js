@@ -37,6 +37,9 @@ function getAverageCompletionTime() {
   
         var formattedTime = hours + ":" + minutes + ":" + seconds;
   
+        // Log the formatted average completion time to the console
+        console.log('Average completion time (HH:mm:ss):', formattedTime);
+  
         // Update the inner HTML of the element with the specified ID
         $('#AverageCompletionTime').html('Average completion time (HH:mm:ss): ' + formattedTime);
       },
@@ -45,4 +48,3 @@ function getAverageCompletionTime() {
       }
     });
   }
-  
