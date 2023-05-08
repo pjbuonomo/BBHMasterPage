@@ -27,7 +27,11 @@ function processData(items) {
     return departmentCount;
 }
 function generateBarGraph(departmentCount) {
-    const ctx = document.getElementById('barChart').getContext('2d');
+    const container = document.getElementById('chartContainer');
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
     const labels = Object.keys(departmentCount);
     const data = Object.values(departmentCount);
 
