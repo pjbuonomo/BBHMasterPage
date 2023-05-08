@@ -58,4 +58,3 @@ function getAverageCompletionTime() {
   $(document).ready(function () {
     getAverageCompletionTime();
   });
-  
