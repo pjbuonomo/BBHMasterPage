@@ -13,6 +13,8 @@ function getAverageCompletionTime() {
         var totalTime = 0;
         var validItems = 0;
   
+        console.log("Data:", results); // Log the data to check if it is correct
+  
         for (var i = 0; i < results.length; i++) {
           var createdDate = new Date(results[i].Created);
           var completedDate = results[i].Completed_x0020_Date;
@@ -22,6 +24,10 @@ function getAverageCompletionTime() {
             var timeDifference = completedDate - createdDate;
             totalTime += timeDifference;
             validItems++;
+  
+            console.log("Created:", createdDate); // Log the created date
+            console.log("Completed:", completedDate); // Log the completed date
+            console.log("Difference:", timeDifference); // Log the time difference
           }
         }
   
@@ -48,3 +54,8 @@ function getAverageCompletionTime() {
       }
     });
   }
+  
+  $(document).ready(function () {
+    getAverageCompletionTime();
+  });
+  
