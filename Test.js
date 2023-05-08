@@ -1,31 +1,48 @@
-const siteUrl = _spPageContextInfo.webAbsoluteUrl;
-const listName = "PurchaseRequests";
-
-async function getListItems() {
-  const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${listName}')/items?$select=ID,Created,Completed_x0020_Date`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json;odata=verbose"
-    }
-  });
-
-  const data = await response.json();
-  return data.d.results;
-}
-
-async function calculateAverageCompletionTime() {
-  const listItems = await getListItems();
-  const completedItems = listItems.filter(item => item.Completed_x0020_Date != null);
-  const completionTimes = completedItems.map(item => {
-    const createdDate = new Date(item.Created);
-    const completedDate = new Date(item.Completed_x0020_Date);
-    const timeDifference = completedDate.getTime() - createdDate.getTime();
-    return timeDifference;
-  });
-
-  const averageCompletionTime = completionTimes.reduce((total, time) => total + time, 0) / completionTimes.length;
-  console.log(averageCompletionTime);
-  document.getElementById("AverageCompletionTime").innerHTML = `${averageCompletionTime} milliseconds`;
-}
-
-calculateAverageCompletionTime();
+function getAverageCompletionTime() {
+    var siteUrl = _spPageContextInfo.webAbsoluteUrl;
+    var requestUri = siteUrl + "/_api/web/lists/getbytitle('PurchaseRequests')/items?$select=Created,Completed_x0020_Date";
+    
+    $.ajax({
+      url: requestUri,
+      type: "GET",
+      headers: {
+        "accept": "application/json;odata=verbose",
+      },
+      success: function (data) {
+        var results = data.d.results;
+        var totalTime = 0;
+        var validItems = 0;
+  
+        for (var i = 0; i < results.length; i++) {
+          var createdDate = new Date(results[i].Created);
+          var completedDate = results[i].Completed_x0020_Date;
+  
+          if (completedDate) {
+            completedDate = new Date(completedDate);
+            var timeDifference = completedDate - createdDate;
+            totalTime += timeDifference;
+            validItems++;
+          }
+        }
+  
+        var averageCompletionTime = totalTime / validItems;
+  
+        // Convert milliseconds to a more readable format (e.g., hours, minutes, seconds)
+        var seconds = Math.floor(averageCompletionTime / 1000);
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+  
+        seconds %= 60;
+        minutes %= 60;
+  
+        var formattedTime = hours + ":" + minutes + ":" + seconds;
+  
+        // Update the inner HTML of the element with the specified ID
+        $('#AverageCompletionTime').html('Average completion time (HH:mm:ss): ' + formattedTime);
+      },
+      error: function (error) {
+        console.log("Error:", error);
+      }
+    });
+  }
+  
