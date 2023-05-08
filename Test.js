@@ -16,7 +16,6 @@ async function getListItems() {
 async function calculateAverageCompletionTime() {
   const listItems = await getListItems();
   const completedItems = listItems.filter(item => item.Completed_x0020_Date != null);
-
   const completionTimes = completedItems.map(item => {
     const createdDate = new Date(item.Created);
     const completedDate = new Date(item.Completed_x0020_Date);
@@ -25,6 +24,7 @@ async function calculateAverageCompletionTime() {
   });
 
   const averageCompletionTime = completionTimes.reduce((total, time) => total + time, 0) / completionTimes.length;
+  console.log(averageCompletionTime);
   document.getElementById("AverageCompletionTime").innerHTML = `${averageCompletionTime} milliseconds`;
 }
 
