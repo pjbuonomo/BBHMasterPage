@@ -58,32 +58,27 @@ function getAverageCompletionTime(range) {
         var days = Math.floor(hours / 24);
         minutes %= 60;
         hours %= 24;
-  
-        // Format the time as "XX d XX hr"
-        var formattedTime = days + " d " + hours + " hr";
-  
+
+        // Format the time as "XX d XX hr XX min"
+        var formattedTime = days + " d " + hours + " hr " + minutes + " min";
+
         // Update the inner HTML of the element with the specified ID
         $('#newRequests').html(formattedTime);
         $('#percentage-trend').html((percentageChange > 0 ? '+' : '') + percentageChange.toFixed(2) + '%');
-      },
-      error: function (error) {
-        console.log("Error:", error);
-      }
-    });
-  }
-  
-  $(document).ready(function () {
-    getAverageCompletionTime('week');
-    
-    $('a.dropdown-item').on('click', function (e) {
-      e.preventDefault();
-      var range = $(this).text().trim().toLowerCase().replace('this ', '');
-      getAverageCompletionTime(range);
-    });
-  });
-  
-  
+        
+        // Update the title
+        updateTitle(range);
+        }
 
+        $(document).ready(function () {
+        getAverageCompletionTime('week');
+        
+        $('a.dropdown-item').on('click', function (e) {
+            e.preventDefault();
+            var range = $(this).text().trim().toLowerCase().replace('this ', '');
+            getAverageCompletionTime(range);
+        });
+});
 
 
 
@@ -98,3 +93,7 @@ function getAverageCompletionTime(range) {
 
 
   
+
+
+
+
