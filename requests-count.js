@@ -1,17 +1,21 @@
-function getAverageCompletionTime(range) {
+function updateTitle(range) {
+    $('h5.card-title span').text("| " + range);
+  }
+  
+  function getAverageCompletionTime(range) {
     var siteUrl = _spPageContextInfo.webAbsoluteUrl;
     var requestUri = siteUrl + "/_api/web/lists/getbytitle('PurchaseRequests')/items?$select=Assigned_x0020_Date,Completed_x0020_Date";
     
     var now = new Date();
     var startDate;
     switch (range) {
-      case "week":
+      case "This Week":
         startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
         break;
-      case "month":
+      case "This Month":
         startDate = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
         break;
-      case "year":
+      case "This Year":
         startDate = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
         break;
     }
@@ -58,43 +62,40 @@ function getAverageCompletionTime(range) {
         var days = Math.floor(hours / 24);
         minutes %= 60;
         hours %= 24;
-
+  
         // Format the time as "XX d XX hr XX min"
         var formattedTime = days + " d " + hours + " hr " + minutes + " min";
-
+  
         // Update the inner HTML of the element with the specified ID
-        $('#newRequests').html(formattedTime);
+        $('#AverageCompletionTime').html(formattedTime);
         $('#percentage-trend').html((percentageChange > 0 ? '+' : '') + percentageChange.toFixed(2) + '%');
         
         // Update the title
         updateTitle(range);
-        }
-
-        $(document).ready(function () {
-        getAverageCompletionTime('week');
-        
-        $('a.dropdown-item').on('click', function (e) {
-            e.preventDefault();
-            var range = $(this).text().trim().toLowerCase().replace('this ', '');
-            getAverageCompletionTime(range);
-        });
-});
-
-
-
-
-
-
-
-
-
-
-
-
+      },
+      error: function (error) {
+        console.log("Error:", error);
+      }
+    });
+  }
+  
+  $(document).ready(function () {
+    getAverageCompletionTime('This Week');
+    
+    $('a.dropdown-item').on('click', function (e) {
+      e.preventDefault();
+      switch ($(this).text()) {
+        case 'This Week':
+          getAverageCompletionTime('This Week');
+          break;
+        case 'This Month':
+          getAverageCompletionTime('This Month');
+          break;
+        case 'This Year':
+          getAverageCompletionTime('This Year');
+          break;
+      }
+    });
+  });
 
   
-
-
-
-
-
