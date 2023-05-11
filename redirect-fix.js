@@ -98,3 +98,103 @@ html += "</div></div></div>";
 
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seamless Looping Slider</title>
+    <style>
+        .slider-wrapper {
+            align-items: center;
+            background: white;
+            display: flex;
+            height: initial;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .slider {
+            background: white;
+            height: 100px;
+            overflow: hidden;
+            position: relative;
+            width: 1260px;
+        }
+
+        .slider .slide-track {
+            display: flex;
+            width: calc(250px * 28);
+            animation: scroll 40s linear infinite;
+        }
+
+        .slider .slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            width: 250px;
+            margin-right: 100px;
+        }
+
+        .slider .slide img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-350px * 14));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-wrapper">
+        <div class="slider">
+            <div class="slide-track">
+                <!-- Duplicate the slides to create a seamless loop -->
+                <!-- Original Slides -->
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/W.B._Mason_(business).png" alt="brand-number-one-1" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/Nike-Logo.png" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/patagonia-logo.jpg" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/Vineyard-Vines-logo.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/YETI_Holdings_logo.svg.png" height="100" width="250" alt="" />
+                </div>
+                <!-- Duplicated Slides -->
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/W.B._Mason_(business).png" alt="brand-number-one-1" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/Nike-Logo.png" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/patagonia-logo.jpg" height="100" width="250" alt="" />
+                </div>                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/Vineyard-Vines-logo.png" height="100" width="250" alt="" />
+                </div>
+                <div class="slide">
+                    <img src="/sites/ESPurchasing/SiteAssets/Logos/YETI_Holdings_logo.svg.png" height="100" width="250" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
