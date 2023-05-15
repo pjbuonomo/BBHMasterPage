@@ -198,3 +198,36 @@ html += "</div></div></div>";
 
 
 
+var trackerCode = '<div class="card-body">' +
+  '<div class="container-fluid">' +
+  '<div class="tracker-wrapper">' +
+  '<div class="tracker-container">' +
+  '<div class="fa-solid fa-list-check track-step step-request-submitted" data-value="0%"></div>' +
+  '<div class="fa-solid fa-user-check track-step step-assigned-to" data-value="20%"></div>' +
+  '<div class="fa-solid fa-gears track-step step-in-progress" data-value="40%"></div>' +
+  '<div class="fa-solid fa-list-check track-step step-in-approval" data-value="60%"></div>' +
+  '<div class="fa-solid fa-truck-fast track-step step-ordered" data-value="80%"></div>' +
+  '<div class="fa-solid fa-check-to-slot track-step step-completed" data-value="100%"></div>' +
+  '<div class="order-progress">' +
+  '<div class="tracking-indicator"></div>' +
+  '</div>' +
+  '</div>' +
+  '<div class="tracker-container time-track-text" style="justify-content: space-between; font-size: 12px; text-align: center; width: 100%;">' +
+  '<div class="time-track-text"> Request Submitted<br />' +
+  '<span id="customCreated" class="time-track-text" style="color: #E32739;">No Notes</span>' +
+  '</div>' +
+  '<div>' +
+  '<span id="customAssignedTo" class="time-track-text red-e3"> Awaiting <br /> Agent Assignment <br />' +
+  '</span>' +
+  '</div>' +
+  '<span> Order<br /> In-Progress </span>' +
+  '<span> Order <br /> In-Approval </span>' +
+  '<span> Order <br /> Placed </span>' +
+  '<span> Order <br /> Completed </span>' +
+  '</div>' +
+  '</div>' +
+  '</div>' +
+  '</div>';
+
+var orderTrackerElement = document.getElementById("orderTracker");
+orderTrackerElement.innerHTML += trackerCode;
